@@ -18,7 +18,7 @@ int main(){
             index++;
             continue;
         }
-        output.erase(index--);
+        output.erase(--index);
         
     }
 
