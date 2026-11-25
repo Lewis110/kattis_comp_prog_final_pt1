@@ -6,18 +6,19 @@ using namespace std;
 void downgradeMulti(int &curMulti, int &seqHits){
     if(curMulti != 1)
         curMulti /= 2;
-    seqHits = curMulti;
+    seqHits = 1;
 }
 
 void upgradeMulti(int &curMulti, int &seqHits){
-    if(seqHits>= 8){
+    if(seqHits>= 8 && (curMulti == 4 || curMulti == 8)){
         curMulti = 8;
-    }else if(seqHits>=4){
+        seqHits = 0;
+    }else if(seqHits>=4 && curMulti == 2){
         curMulti = 4;
-    }else if(seqHits>=2){
+        seqHits = 0;
+    }else if(seqHits>=2 && curMulti == 1){
         curMulti = 2;
-    }else{
-        curMulti = 1;
+        seqHits = 0;
     }
 }
 int main(){
@@ -33,15 +34,14 @@ int main(){
     for (int i = 0; i<a.size(); i++){
         if(a[i]==0){
             downgradeMulti(curMulti, seqHits);
-            cout<<"curr multi is " << curMulti<<'\n';
-            cout<<"curr seq is " << seqHits<<'\n';
+            //cout<<"curr multi is " << curMulti<<'\n';
+            //cout<<"curr seq is " << seqHits<<'\n';
         }
         else{
             
             upgradeMulti(curMulti, seqHits);
             //cout<<"curr seq is " << seqHits<<'\n';
             //cout<<"curr multi in upgrade is " << curMulti<<'\n';
-            
             seqHits++;
             points+=a[i]*curMulti;
             //cout<<"curr points are " << points<<'\n';
