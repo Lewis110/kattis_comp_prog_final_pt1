@@ -35,8 +35,8 @@ int main() {
         pos p1 = {x1, y1};
         pos p2 = {x2, y2};
 
-        vector<pos> v1;
-        vector<pos> v2;
+        vector<pos> position1;
+        vector<pos> position2;
 
         if(p1.x == p2.x && p1.y == p2.y ) {
             cout << "0 " << a << " " << y1 << endl;
@@ -44,25 +44,24 @@ int main() {
         }
         for(int j = 0; j < 9; j++) {
             if(inBoard(p1.x+j, p1.y+j)) {
-                v1.push_back({p1.x+j, p1.y+j});
+                position1.push_back({p1.x+j, p1.y+j});
             }
             if(inBoard(p1.x+j, p1.y-j)) {
-                v1.push_back({p1.x+j, p1.y-j});
+                position1.push_back({p1.x+j, p1.y-j});
             }
             if(inBoard(p1.x-j, p1.y+j)) {
-                v1.push_back({p1.x-j, p1.y+j});
+                position1.push_back({p1.x-j, p1.y+j});
             }
             if(inBoard(p1.x-j, p1.y-j)) {
-                v1.push_back({p1.x-j, p1.y-j});
+                position1.push_back({p1.x-j, p1.y-j});
             }
         }
 
         bool printed = false;
-        for(int j = 0; j < v1.size(); j++) {
-            if(v1[j].x == p2.x &&
-               v1[j].y == p2.y) {
-                cout << "1 " << c(p1.x) << " " << p1.y << " "
-                             << c(p2.x) << " " << p2.y << endl;
+        for(int j = 0; j < position1.size(); j++) {
+            if(position1[j].x == p2.x &&
+               position1[j].y == p2.y) {
+                cout << "1 " << c(p1.x) << " " << p1.y << " " << c(p2.x) << " " << p2.y << endl;
                 printed = true;
             }
         }
@@ -70,25 +69,26 @@ int main() {
             continue;
         }
 
-        for(int j = 0; j < 9; j++) {
+        for(int j = 0; j <= 8; j++) {
             if(inBoard(p2.x+j, p2.y+j)) {
-                v2.push_back({p2.x+j, p2.y+j});
+                position2.push_back({p2.x+j, p2.y+j});
             }
             if(inBoard(p2.x+j, p2.y-j)) {
-                v2.push_back({p2.x+j, p2.y-j});
+                position2.push_back({p2.x+j, p2.y-j});
             }
             if(inBoard(p2.x-j, p2.y+j)) {
-                v2.push_back({p2.x-j, p2.y+j});
+                position2.push_back({p2.x-j, p2.y+j});
             }
             if(inBoard(p2.x-j, p2.y-j)) {
-                v2.push_back({p2.x-j, p2.y-j});
+                position2.push_back({p2.x-j, p2.y-j});
             }
         }
+
         int found = -1;
-        for(int j = 0; j < v1.size(); j++) {
-            for(int k = 0; k < v2.size(); k++) {
-                if(v1[j].x == v2[k].x &&
-                   v1[j].y == v2[k].y) {
+        for(int j = 0; j < position1.size(); j++) {
+            for(int k = 0; k < position2.size(); k++) {
+                if(position1[j].x == position2[k].x &&
+                   position1[j].y == position2[k].y) {
                     found = j;
                 }
             }
@@ -99,9 +99,12 @@ int main() {
             continue;
         }
 
-        pos mid = v1[found];
+        pos mid = position1[found];
         cout << "2 " << c(p1.x)  << " " << p1.y  << " "
                      << c(mid.x) << " " << mid.y << " "
                      << c(p2.x)  << " " << p2.y  << endl;
     }
+
+
+        
 }
